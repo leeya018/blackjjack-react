@@ -1,4 +1,4 @@
-import App from "@/ui/App";
+import App from "@/features/game";
 export default function Homepage() {
   return (
     <div>

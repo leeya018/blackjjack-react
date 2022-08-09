@@ -1,6 +1,10 @@
-import { MESSAGES } from "ui/App";
+import { MESSAGES } from "./";
+import PrimaryButton from "@/ui/button/primary";
 
-export default function Balance({ message, balance, placeBet, bet, gameOver }) {
+import BoardSecondary from "@/ui/board/secondary";
+import BoardPrimary from "@/ui/board/primary";
+
+export default function Balance({ message, balance, placeBet, bet }) {
   function betValidationCheck() {
     return bet <= balance;
   }
@@ -9,8 +13,9 @@ export default function Balance({ message, balance, placeBet, bet, gameOver }) {
     <div className=" flex flex-col items-center gap-2">
       {/* balance row */}
       <div className="flex justify-center gap-1">
-        <button className="button-common ">{message}</button>
-        <button className="button-common">{balance + "$"}</button>
+        <BoardSecondary>{message}</BoardSecondary>
+        {/* <div className="button-common"></div> */}
+        <BoardPrimary>{balance + "$"}</BoardPrimary>
       </div>
       {/* place the bet  */}
       <div className="flex justify-center gap-1">
@@ -23,13 +28,20 @@ export default function Balance({ message, balance, placeBet, bet, gameOver }) {
           placeholder="place your bet"
           onChange={(e) => setBet(e.target.value)}
         />
-        <button
+        {/* <button
           className={`button-common   disabled:bg-gray-600`}
           disabled={!betValidationCheck() || message !== MESSAGES.bet}
           onClick={placeBet}
         >
           place the bet
-        </button>
+        </button> */}
+
+        <PrimaryButton
+          disabled={!betValidationCheck() || message !== MESSAGES.bet}
+          onClick={placeBet}
+        >
+          place the bet
+        </PrimaryButton>
       </div>
     </div>
   );

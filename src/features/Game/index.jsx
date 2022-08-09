@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
-import Balance from "@/ui/Balance";
-import Controls from "@/ui/Controls";
-import Hand from "@/ui/Hand";
+import Balance from "./balance";
+import Controls from "./controls";
+import Hand from "./hand";
 
 import json from "@/cards.json";
 
@@ -20,7 +20,7 @@ export const TITLE = Object.assign({
   dealer: "dealer hand",
 });
 
-export default function App({}) {
+export default function Game({}) {
   const [balance, setBalance] = useState(100);
   const [bet, setBet] = useState(10);
   const [message, setMessage] = useState(MESSAGES.bet);
@@ -63,13 +63,15 @@ export default function App({}) {
     if (amount > 21) {
       setMessage(MESSAGES.bust);
     }
-    if (amount >= 21) {
-      setControls({ ...controls, hitDisabled: true, standDisabled: true });
-    }
+
     if (amount == 21) {
       stand();
     }
+    if (amount >= 21) {
+      setControls({ ...controls, hitDisabled: true, standDisabled: true });
+    }
   }, [playerCards]);
+
   //   useEffect(() => {
   //     if (controls.hit) {
   //       let card = deck[0];
@@ -237,14 +239,19 @@ export default function App({}) {
       {message !== MESSAGES.bet && (
         <>
           <Controls
-            reset={reset}
-            takeCard={takeCard}
-            balance={balance}
-            setBet={setBet}
-            setControls={setControls}
-            controls={controls}
-            stand={stand}
-            message={message}
+            // reset={reset}
+            // takeCard={takeCard}
+            // balance={balance}
+            // setBet={setBet}
+            // setControls={setControls}
+            // controls={controls}
+            // stand={stand}
+            // message={message}
+            onHit={takeCard}
+            onStand={stand}
+            onReset={reset}
+            amount={calcCardsAmount(playerCards)}
+            dealerCards={dealerCards}
           />
           {/* players container */}
           <div className="game flex flex-col items-center">

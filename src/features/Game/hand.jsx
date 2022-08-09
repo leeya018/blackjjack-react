@@ -1,7 +1,4 @@
 import { v4 as uuidv4 } from "uuid";
-import { TITLE } from "@/ui/App";
-import json from "@/cards.json";
-
 import Card from "ui/Card";
 
 export default function Hand({ cards = [], title, amount }) {
