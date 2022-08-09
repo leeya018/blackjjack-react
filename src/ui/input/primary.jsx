@@ -1,5 +1,6 @@
 import Input from "./";
 export default function PrimaryInput({ validationCheck = () => {}, ...rest }) {
+  // console.log(rest.value);
   return (
     <Input
       placeholder="place your bet"

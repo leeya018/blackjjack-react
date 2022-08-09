@@ -1,4 +1,9 @@
-export default function Input(placeholder, className, value, onChange) {
+export default function Input({
+  placeholder = "",
+  className = "",
+  value = 0,
+  onChange = () => {},
+}) {
   return (
     <input
       type="text"
