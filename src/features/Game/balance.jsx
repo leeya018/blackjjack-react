@@ -28,7 +28,6 @@ export default function Balance({ message, balance, placeBet, bet }) {
               value={bet}
               onChange={(e) => setBet(e.target.value)}
             />
-
             <PrimaryButton
               disabled={!betValidationCheck() || message !== MESSAGES.bet}
               onClick={placeBet}
