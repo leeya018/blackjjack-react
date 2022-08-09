@@ -4,6 +4,8 @@ import PrimaryButton from "@/ui/button/primary";
 import BoardSecondary from "@/ui/board/secondary";
 import BoardPrimary from "@/ui/board/primary";
 
+import PrimaryInput from "@/ui/input/primary";
+
 export default function Balance({ message, balance, placeBet, bet }) {
   function betValidationCheck() {
     return bet <= balance;
@@ -13,35 +15,28 @@ export default function Balance({ message, balance, placeBet, bet }) {
     <div className=" flex flex-col items-center gap-2">
       {/* balance row */}
       <div className="flex justify-center gap-1">
-        <BoardSecondary>{message}</BoardSecondary>
+        <BoardSecondary disabled={true}>{message}</BoardSecondary>
         {/* <div className="button-common"></div> */}
         <BoardPrimary>{balance + "$"}</BoardPrimary>
       </div>
       {/* place the bet  */}
       <div className="flex justify-center gap-1">
-        <input
-          type="text"
-          value={bet}
-          className={`button-common ${
-            betValidationCheck() ? "text-black" : "text-red-600"
-          }`}
-          placeholder="place your bet"
-          onChange={(e) => setBet(e.target.value)}
-        />
-        {/* <button
-          className={`button-common   disabled:bg-gray-600`}
-          disabled={!betValidationCheck() || message !== MESSAGES.bet}
-          onClick={placeBet}
-        >
-          place the bet
-        </button> */}
+        {MESSAGES.bet == message && (
+          <>
+            <PrimaryInput
+              validationCheck={betValidationCheck}
+              value={bet}
+              onChange={(e) => setBet(e.target.value)}
+            />
 
-        <PrimaryButton
-          disabled={!betValidationCheck() || message !== MESSAGES.bet}
-          onClick={placeBet}
-        >
-          place the bet
-        </PrimaryButton>
+            <PrimaryButton
+              disabled={!betValidationCheck() || message !== MESSAGES.bet}
+              onClick={placeBet}
+            >
+              place the bet
+            </PrimaryButton>
+          </>
+        )}
       </div>
     </div>
   );

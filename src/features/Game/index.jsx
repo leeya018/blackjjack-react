@@ -67,33 +67,13 @@ export default function Game({}) {
     if (amount == 21) {
       stand();
     }
-    if (amount >= 21) {
-      setControls({ ...controls, hitDisabled: true, standDisabled: true });
-    }
   }, [playerCards]);
-
-  //   useEffect(() => {
-  //     if (controls.hit) {
-  //       let card = deck[0];
-  //       setDeck(deck.slice(1));
-  //       setplayerCards([...playerCards, card]);
-  //     }
-  //   }, [controls.hit]);
 
   useEffect(() => {
     if (gameOver) {
       checkWin();
     }
   }, [gameOver]);
-
-  //   need to prevent this useEffect that run forever
-  //   useEffect(() => {
-  //     if (turn.dealer) {
-  //       if (dealerAmount < 17) {
-  //         setDealerCards([...dealerCards, getCard()]);
-  //       }
-  //     }
-  //   }, [turn, dealerCards]);
 
   function reset() {
     setControls({
@@ -145,13 +125,12 @@ export default function Game({}) {
       setMessage(MESSAGES.tie);
     }
   }
+
   function stand() {
     stopBet();
     revealCards();
     takeMoreCards();
     setGameOver(true);
-    // this is not the place for check win
-    // checkWin();
   }
   function getValue(value) {
     switch (value) {
@@ -239,14 +218,6 @@ export default function Game({}) {
       {message !== MESSAGES.bet && (
         <>
           <Controls
-            // reset={reset}
-            // takeCard={takeCard}
-            // balance={balance}
-            // setBet={setBet}
-            // setControls={setControls}
-            // controls={controls}
-            // stand={stand}
-            // message={message}
             onHit={takeCard}
             onStand={stand}
             onReset={reset}
